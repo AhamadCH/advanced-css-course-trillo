@@ -143,7 +143,7 @@
       margin-bottom: .5rem;
       
       @media only screen and (max-width: $bp-medium) {
-        margin-bottom: 0;
+        margin: 0;
       }
     }
 
@@ -162,8 +162,8 @@
     background-color: var(--color-primary);
     transform: scaleY(0);
     transition: transform .2s,
-                width .4s cubic-bezier(1,0,0,1) .2s
-                background-color .1;
+                width .4s cubic-bezier(1,0,0,1) .2s,
+                background-color .1s;
   }
 
   &__item:hover::before,
@@ -184,7 +184,7 @@
     display: block;
     padding: 1.5rem 3rem;
     position: relative;
-    z-index: 1;
+    z-index: 10;
 
     display: flex;
     align-items: center;
@@ -398,16 +398,20 @@
     margin-right: .7rem;
 
     // Older Browsers
-    // background-image: url(../img/chevron-thin-right.svg);
-    // background-size: cover;
+    background-image: url(../img/chevron-thin-right.svg);
+    background-size: cover;
 
     //Newer Browsers - Masks
-    background-color: var(--color-primary);
-    -webkit-mask-image: url(../img/chevron-thin-right.svg);
-    -webkit-mask-size: cover;
+    @supports (--webkit-mask-image: url()) or (mask-image: url()) {
+      background-color: var(--color-primary);
+      -webkit-mask-image: url(../img/chevron-thin-right.svg);
+      -webkit-mask-size: cover;
 
-    mask-image: url(../img/chevron-thin-right.svg);
-    mask-size: cover;
+      mask-image: url(../img/chevron-thin-right.svg);
+      mask-size: cover;
+
+      background-image: none;
+    }
   }
 }
 
